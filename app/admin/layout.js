@@ -8,27 +8,32 @@ export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
-  // 🟢 Notifications states
   const [isNotifOpen, setIsNotifOpen] = useState(false);
-  const [hasUnread, setHasUnread] = useState(false); // Default false rakha hai
+  const [hasUnread, setHasUnread] = useState(false); 
 
-  // 🟢 Title set karna aur LocalStorage se notification state read karna
   useEffect(() => {
     document.title = "Admin Dashboard | Shajjad Electronics";
-    
-    // Check if notifications were already marked as read in previous sessions
     const notificationsRead = localStorage.getItem('notificationsRead');
     if (notificationsRead !== 'true') {
-       // Agar read nahi hui hain pehle, toh red dot dikhao
        setHasUnread(true);
     }
   }, [pathname]);
 
-  // Function to mark notifications as read and save to localStorage
   const handleMarkAllRead = () => {
      setHasUnread(false);
      setIsNotifOpen(false);
      localStorage.setItem('notificationsRead', 'true');
+  };
+
+  // 🟢 100% FIX: Logout ko sahi function se chalaya hai
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/logout', { method: 'POST' });
+      // Logout hone ke baad turant login page par bhej do
+      window.location.href = '/admin/login';
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   if (pathname === '/admin/login') {
@@ -69,7 +74,6 @@ export default function AdminLayout({ children }) {
           </div>
           
           <div className="flex flex-col justify-center">
-            {/* 🟢 UPDATED: Sidebar Logo Text Main Website jaisa kar diya hai */}
             <h1 className="text-lg sm:text-xl font-bold tracking-wider leading-tight uppercase">FLOREY</h1>
             <p className="text-[9px] sm:text-[10px] text-gray-400 font-medium tracking-[0.15em] mt-0.5 uppercase">Shajjad Electronics</p>
           </div>
@@ -98,12 +102,11 @@ export default function AdminLayout({ children }) {
         </nav>
 
         <div className="p-4 border-t border-gray-800 shrink-0">
-          <Link href="/api/logout">
-            <button className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-bold text-red-400 hover:text-white hover:bg-red-600 rounded-xl transition-colors shadow-sm">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-              Logout Admin
-            </button>
-          </Link>
+          {/* 🟢 Yahan <Link> hatakar onClick laga diya gaya hai */}
+          <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-bold text-red-400 hover:text-white hover:bg-red-600 rounded-xl transition-colors shadow-sm cursor-pointer">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+            Logout Admin
+          </button>
         </div>
       </aside>
 
@@ -147,7 +150,6 @@ export default function AdminLayout({ children }) {
               <div className="absolute top-14 right-14 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden transform origin-top-right transition-all">
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-100 flex justify-between items-center">
                   <span className="text-sm font-black text-gray-900">Notifications</span>
-                  {/* 🟢 UPDATED: Mark all read function called here */}
                   <button 
                     onClick={handleMarkAllRead} 
                     className="text-xs text-red-600 font-bold hover:underline"

@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server';
 
-export async function GET(request) {
-  // Cookie ko expire karke login page par bhej dena
-  const response = NextResponse.redirect(new URL('/admin/login', request.url));
+// 🟢 GET ki jagah POST kar diya hai taaki background mein auto-run na ho
+export async function POST(request) {
+  const response = NextResponse.json({ success: true, message: "Logged out successfully" });
+  
   response.cookies.set({
     name: 'admin_auth_token',
     value: '',
     maxAge: 0,
     path: '/',
   });
+  
   return response;
 }
