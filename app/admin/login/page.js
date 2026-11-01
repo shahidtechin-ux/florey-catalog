@@ -1,7 +1,6 @@
 "use client";
 import { useState } from 'react';
 import Image from 'next/image';
-// useRouter ko hata diya gaya hai kyunki hum hard reload use karenge
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -28,12 +27,14 @@ export default function AdminLogin() {
       const data = await res.json();
       
       if (data.success) {
-        // 🟢 FIX 1: Cookie ko Secure aur SameSite=Lax ke sath set karna (Vercel ke liye zaroori)
+        // Cookie set karna
         const maxAge = rememberMe ? 30 * 24 * 60 * 60 : 86400; 
         document.cookie = `admin_auth_token=authenticated_true; path=/; max-age=${maxAge}; Secure; SameSite=Lax`;
         
-        // 🟢 FIX 2: router.push ki jagah window.location.href use karna taaki middleware turant cookie padh sake
-        window.location.href = '/admin';
+        // 🟢 100% FIX: 1 second (1000ms) ka delay lagaya hai taaki cookie pakka save ho jaye
+        setTimeout(() => {
+          window.location.href = '/admin';
+        }, 1000);
       } else {
         setError(data.message || "Invalid Email or Password");
       }
