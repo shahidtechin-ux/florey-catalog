@@ -172,34 +172,34 @@ function ProductsContent() {
     <div className="bg-[#f8f9fa] min-h-screen font-sans pb-10">
       
       {/* 1. CINEMATIC PREMIUM HERO */}
-      <section className="relative bg-[#0a0a0a] border-b-[4px] border-red-600 flex items-center min-h-[420px] md:min-h-[500px] overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-600/20 blur-[120px] rounded-full pointer-events-none z-0"></div>
+      <section className="relative bg-[#0a0a0a] border-b-[3px] sm:border-b-[4px] border-red-600 flex items-center min-h-[350px] sm:min-h-[420px] md:min-h-[500px] overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] sm:w-[800px] sm:h-[800px] bg-red-600/20 blur-[100px] sm:blur-[120px] rounded-full pointer-events-none z-0"></div>
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 z-0"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col md:flex-row items-center justify-between gap-12 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-12 py-10 sm:py-16">
           <div className="md:w-1/2 text-center md:text-left">
-            <h4 className="text-red-500 font-bold tracking-[0.2em] uppercase mb-4 text-xs sm:text-sm flex items-center justify-center md:justify-start gap-2">
-              <span className="w-8 h-[2px] bg-red-600"></span> Premium Electrical Solutions
+            <h4 className="text-red-500 font-bold tracking-[0.2em] uppercase mb-3 sm:mb-4 text-[10px] sm:text-xs md:text-sm flex items-center justify-center md:justify-start gap-2">
+              <span className="w-6 sm:w-8 h-[2px] bg-red-600"></span> Premium Electrical Solutions
             </h4>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6 tracking-tight leading-tight">
               Designed for <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-500">Modern Spaces.</span>
             </h1>
-            <p className="text-gray-400 text-base sm:text-lg mb-8 max-w-lg font-medium mx-auto md:mx-0">
+            <p className="text-gray-400 text-xs sm:text-base md:text-lg mb-6 sm:mb-8 max-w-lg font-medium mx-auto md:mx-0">
               Explore FLOREY's complete range of electrical products engineered for contemporary residential and commercial spaces.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a href="#catalogue" className="bg-red-600 text-white font-bold px-8 py-4 rounded-full shadow-[0_4px_15px_rgba(220,38,38,0.4)] hover:bg-red-700 hover:-translate-y-1 transition-all text-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+              <a href="#catalogue" className="bg-red-600 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-[0_4px_15px_rgba(220,38,38,0.4)] hover:bg-red-700 hover:-translate-y-1 transition-all text-xs sm:text-base text-center">
                 Explore Products &rarr;
               </a>
-              <Link href="#download" className="bg-transparent border border-gray-600 text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-black transition-all text-center">
+              <Link href="#download" className="bg-transparent border border-gray-600 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white hover:text-black transition-all text-xs sm:text-base text-center">
                 View Catalogue
               </Link>
             </div>
           </div>
           
           <div className="md:w-1/2 flex justify-center md:justify-end relative">
-             <div className="w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] bg-gradient-to-br from-gray-800 to-black border border-gray-700 rounded-full flex items-center justify-center shadow-2xl relative">
+             <div className="w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] bg-gradient-to-br from-gray-800 to-black border border-gray-700 rounded-full flex items-center justify-center shadow-2xl relative">
                 <div className="absolute inset-0 bg-red-600/20 rounded-full blur-2xl"></div>
                 <div className="relative w-[80%] h-[80%] z-10 hover:scale-110 transition-transform duration-700">
                   <Image src="/images/hero-switch.png" alt="Premium Florey Switch" fill className="object-contain drop-shadow-2xl" />
@@ -210,15 +210,15 @@ function ProductsContent() {
       </section>
 
       {/* 2. EXPLORE CATEGORIES */}
-      <section id="catalogue" className="bg-[#f8f9fa] pt-12 sm:pt-20 pb-4 sticky top-0 z-40 border-b border-gray-200">
+      <section id="catalogue" className="bg-[#f8f9fa] pt-8 sm:pt-20 pb-4 sticky top-0 z-40 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl sm:text-2xl font-black text-gray-900 uppercase tracking-wide mb-4 sm:mb-6">Explore Categories</h2>
-          <div className="flex overflow-x-auto pb-4 gap-2 sm:gap-3 hide-scrollbar items-center">
+          <h2 className="text-lg sm:text-2xl font-black text-gray-900 uppercase tracking-wide mb-3 sm:mb-6">Explore Categories</h2>
+          <div className="flex overflow-x-auto pb-3 sm:pb-4 gap-2 sm:gap-3 hide-scrollbar items-center">
             {categoriesList.map((cat, idx) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`whitespace-nowrap px-4 py-2 sm:px-6 sm:py-3 rounded-xl text-[10px] sm:text-xs font-bold tracking-widest transition-all uppercase flex items-center gap-1.5 sm:gap-2 ${
+                className={`whitespace-nowrap px-3.5 py-2 sm:px-6 sm:py-3 rounded-xl text-[10px] sm:text-xs font-bold tracking-widest transition-all uppercase flex items-center gap-1.5 sm:gap-2 shrink-0 ${
                   activeCategory === cat 
                     ? 'bg-red-600 text-white shadow-[0_4px_15px_rgba(220,38,38,0.3)]' 
                     : 'bg-white border border-gray-200 text-gray-600 hover:border-red-300 hover:text-red-600 shadow-sm'
@@ -233,15 +233,15 @@ function ProductsContent() {
       </section>
 
       {/* 3. MAIN CATALOGUE & FILTERS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-16 sm:pb-24">
         
         {/* MOBILE FILTER BUTTON */}
         <div className="lg:hidden flex items-center justify-between mb-4 bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
            <button 
              onClick={() => setShowMobileFilters(!showMobileFilters)}
-             className="flex items-center gap-2 text-sm font-bold text-gray-800"
+             className="flex items-center gap-2 text-xs sm:text-sm font-bold text-gray-800"
            >
-              <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>
               Filter & Sort
            </button>
            <p className="text-xs font-bold text-gray-500">{filteredProducts.length} Items</p>
@@ -265,7 +265,7 @@ function ProductsContent() {
               {/* Mobile Sort Dropdown */}
               <div className="mb-8 lg:hidden">
                  <h4 className="font-bold text-gray-500 text-xs uppercase mb-3">Sort Results</h4>
-                 <select value={sortOption} onChange={(e) => setSortOption(e.target.value)} className="w-full bg-gray-50 border border-gray-200 text-gray-700 py-2.5 px-4 rounded-xl text-sm font-bold focus:outline-none focus:border-red-600">
+                 <select value={sortOption} onChange={(e) => setSortOption(e.target.value)} className="w-full bg-gray-50 border border-gray-200 text-gray-700 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold focus:outline-none focus:border-red-600">
                     <option value="Featured">Featured First</option>
                     <option value="A - Z">Alphabetical (A-Z)</option>
                     <option value="Z - A">Alphabetical (Z-A)</option>
@@ -286,7 +286,7 @@ function ProductsContent() {
                          onChange={() => toggleSeries(series)}
                          className="w-4 h-4 text-red-600 rounded border-gray-300 focus:ring-red-600 cursor-pointer" 
                       />
-                      <span className={`text-sm font-medium transition-colors ${selectedSeries.includes(series) ? 'text-red-600 font-bold' : 'text-gray-700 group-hover:text-red-600'}`}>{series} Series</span>
+                      <span className={`text-xs sm:text-sm font-medium transition-colors ${selectedSeries.includes(series) ? 'text-red-600 font-bold' : 'text-gray-700 group-hover:text-red-600'}`}>{series} Series</span>
                     </label>
                   ))}
                 </div>
@@ -303,11 +303,11 @@ function ProductsContent() {
                         onChange={() => setIsFeaturedOnly(!isFeaturedOnly)}
                         className="w-4 h-4 text-red-600 rounded border-gray-300 focus:ring-red-600 cursor-pointer" 
                      />
-                     <span className={`text-sm font-medium transition-colors ${isFeaturedOnly ? 'text-red-600 font-bold' : 'text-gray-700 group-hover:text-red-600'}`}>Featured Only</span>
+                     <span className={`text-xs sm:text-sm font-medium transition-colors ${isFeaturedOnly ? 'text-red-600 font-bold' : 'text-gray-700 group-hover:text-red-600'}`}>Featured Only</span>
                   </label>
                   <label className="flex items-center gap-3 cursor-pointer group">
                      <input type="checkbox" defaultChecked className="w-4 h-4 text-red-600 rounded border-gray-300 focus:ring-red-600 cursor-pointer" />
-                     <span className="text-sm font-bold text-red-600">In Stock</span>
+                     <span className="text-xs sm:text-sm font-bold text-red-600">In Stock</span>
                   </label>
                 </div>
               </div>
@@ -347,13 +347,13 @@ function ProductsContent() {
                   <ProductCard key={product._id} product={product} />
                 ))
               ) : (
-                <div className="col-span-full py-20 text-center bg-white rounded-2xl border border-dashed border-gray-300">
+                <div className="col-span-full py-20 text-center bg-white rounded-2xl border border-dashed border-gray-300 p-6">
                   <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
                      <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">No Products Found</h3>
-                  <p className="text-gray-500 text-sm">Try changing your filters or selecting a different category.</p>
-                  <button onClick={() => {setActiveCategory('ALL'); setSelectedSeries([]); setIsFeaturedOnly(false);}} className="mt-4 text-red-600 font-bold text-sm hover:underline">Clear All Filters</button>
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">No Products Found</h3>
+                  <p className="text-gray-500 text-xs sm:text-sm mb-4">Try changing your filters or selecting a different category.</p>
+                  <button onClick={() => {setActiveCategory('ALL'); setSelectedSeries([]); setIsFeaturedOnly(false);}} className="text-red-600 font-bold text-xs sm:text-sm hover:underline">Clear All Filters</button>
                 </div>
               )}
             </div>
@@ -363,7 +363,7 @@ function ProductsContent() {
       </section>
 
       {/* 4. CATEGORY SHOWCASE */}
-      <section className="bg-[#0a0a0a] text-white py-16 sm:py-20 overflow-hidden">
+      <section className="bg-[#0a0a0a] text-white py-12 sm:py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12">
             <div className="w-full md:w-1/2 aspect-[4/3] bg-gray-900 rounded-2xl sm:rounded-3xl relative overflow-hidden border border-gray-800 shadow-2xl group">
@@ -372,8 +372,8 @@ function ProductsContent() {
             </div>
             <div className="w-full md:w-1/2 text-center md:text-left">
               <h4 className="text-red-500 font-black tracking-[0.2em] uppercase mb-2 sm:mb-4 text-[10px] sm:text-xs">Category Showcase</h4>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-6 uppercase tracking-wide leading-tight">Modular <br className="hidden sm:block"/>Switches</h2>
-              <p className="text-gray-400 text-sm sm:text-lg mb-6 sm:mb-8 max-w-md mx-auto md:mx-0">Contemporary modular solutions designed perfectly for modern residential and commercial spaces.</p>
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-6 uppercase tracking-wide leading-tight">Modular <br className="hidden sm:block"/>Switches</h2>
+              <p className="text-gray-400 text-xs sm:text-lg mb-6 sm:mb-8 max-w-md mx-auto md:mx-0">Contemporary modular solutions designed perfectly for modern residential and commercial spaces.</p>
               <button onClick={() => {setActiveCategory("Modular Switches"); window.scrollTo(0,0);}} className="border-b-2 border-red-600 text-white font-bold pb-1 hover:text-red-500 transition-colors uppercase tracking-widest text-[10px] sm:text-sm">
                 Explore Modular Range &rarr;
               </button>
@@ -382,14 +382,14 @@ function ProductsContent() {
         </div>
       </section>
 
-      {/* 5. DOWNLOAD CTA (🟢 WHITE BACKGROUND UPDATE) */}
-      <section id="download" className="bg-gray-50 py-16 sm:py-20 border-b border-gray-200">
+      {/* 5. DOWNLOAD CTA */}
+      <section id="download" className="bg-gray-50 py-12 sm:py-20 border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12 bg-white p-8 sm:p-14 rounded-2xl sm:rounded-[2rem] border border-gray-200 shadow-xl relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12 bg-white p-6 sm:p-14 rounded-2xl sm:rounded-[2rem] border border-gray-200 shadow-xl relative overflow-hidden">
             <div className="absolute -right-20 -top-20 w-64 h-64 bg-red-600/10 blur-[80px] rounded-full pointer-events-none"></div>
             
             <div className="w-full md:w-1/3 flex justify-center relative z-10">
-              <div className="w-40 sm:w-48 h-56 sm:h-64 bg-white rounded-r-xl rounded-l-sm shadow-2xl relative flex flex-col border-l-4 sm:border-l-8 border-red-600 overflow-hidden">
+              <div className="w-36 sm:w-48 h-48 sm:h-64 bg-white rounded-r-xl rounded-l-sm shadow-2xl relative flex flex-col border-l-4 sm:border-l-8 border-red-600 overflow-hidden">
                  <div className="flex-grow relative w-full h-full">
                     <Image 
                       src={catalogue?.coverImage || "/images/catalogue-cover.png"} 
@@ -399,20 +399,19 @@ function ProductsContent() {
                     />
                  </div>
                  <div className="p-2 sm:p-3 bg-gray-900 border-t border-gray-800 rounded-br-xl text-center relative z-10">
-                   <p className="text-[7px] sm:text-[8px] font-black text-white uppercase tracking-widest">Product Manual</p>
-                   <p className="text-[9px] sm:text-[10px] font-bold text-red-500">{catalogue?.edition || '2026-27'}</p>
+                    <p className="text-[7px] sm:text-[8px] font-black text-white uppercase tracking-widest">Product Manual</p>
+                    <p className="text-[9px] sm:text-[10px] font-bold text-red-500">{catalogue?.edition || '2026-27'}</p>
                  </div>
               </div>
             </div>
             
             <div className="w-full md:w-2/3 text-center md:text-left relative z-10">
               <h4 className="text-red-600 font-black tracking-[0.2em] uppercase mb-2 sm:mb-3 text-[10px] sm:text-xs">The Complete Range</h4>
-              <h2 className="text-2xl sm:text-3xl font-black text-gray-900 mb-3 sm:mb-4 uppercase">{catalogue?.title || "Product & Price Manual"}</h2>
+              <h2 className="text-xl sm:text-3xl font-black text-gray-900 mb-3 sm:mb-4 uppercase">{catalogue?.title || "Product & Price Manual"}</h2>
               <p className="text-gray-600 text-xs sm:text-base mb-6 sm:mb-8 max-w-md mx-auto md:mx-0">Explore our comprehensive catalogue for complete product specifications, series details, and item codes.</p>
               
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
                 
-                {/* 🟢 VIEW PDF BUTTON */}
                 <button 
                   onClick={handleViewCatalogue}
                   disabled={isViewing || (!catalogue?.fileUrl && !catalogue?.pdfUrl)}
@@ -421,7 +420,6 @@ function ProductsContent() {
                   {isViewing ? "Loading..." : "View Catalogue"}
                 </button>
 
-                {/* 🟢 DOWNLOAD PDF BUTTON */}
                 <button 
                   onClick={handleDownloadCatalogue}
                   disabled={isDownloading || (!catalogue?.fileUrl && !catalogue?.pdfUrl)}
@@ -455,7 +453,7 @@ export default function ProductsPage() {
   )
 }
 
-// ----- REUSABLE PRODUCT CARD -----
+// ----- REUSABLE PRODUCT CARD (🟢 UPDATED: Entire card clickable to open product view) -----
 function ProductCard({ product }) {
   let badgeText = "";
   if (product.isFeatured) badgeText = "FEATURED";
@@ -464,7 +462,7 @@ function ProductCard({ product }) {
   const imageUrl = product.image || (product.images && product.images[0]) || 'https://via.placeholder.com/300?text=No+Image';
   
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-gray-200 hover:border-red-300 hover:shadow-[0_15px_30px_rgba(220,38,38,0.08)] transition-all duration-300 group flex flex-col h-full">
+    <Link href={`/products/${product._id}`} className="bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-gray-200 hover:border-red-300 hover:shadow-[0_15px_30px_rgba(220,38,38,0.08)] transition-all duration-300 group flex flex-col h-full cursor-pointer">
       
       <div className="relative bg-[#f8f9fa] flex items-center justify-center overflow-hidden border-b border-gray-100 aspect-square p-3 sm:p-6">
         {badgeText && (
@@ -496,12 +494,12 @@ function ProductCard({ product }) {
                  {product.originalPrice && <p className="text-[9px] sm:text-[11px] text-gray-400 line-through">₹{product.originalPrice}</p>}
               </div>
            </div>
-           <Link href={`/products/${product._id}`} className="bg-gray-100 hover:bg-red-600 text-gray-900 hover:text-white p-2 sm:p-2.5 rounded-lg transition-colors">
-             <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-           </Link>
+           <div className="bg-gray-100 group-hover:bg-red-600 text-gray-900 group-hover:text-white p-2 sm:p-2.5 rounded-lg transition-colors">
+              <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+           </div>
         </div>
       </div>
       
-    </div>
+    </Link>
   );
 }
