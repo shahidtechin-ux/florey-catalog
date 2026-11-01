@@ -27,14 +27,10 @@ export default function AdminLogin() {
       const data = await res.json();
       
       if (data.success) {
-        // Cookie set karna
-        const maxAge = rememberMe ? 30 * 24 * 60 * 60 : 86400; 
-        document.cookie = `admin_auth_token=authenticated_true; path=/; max-age=${maxAge}; Secure; SameSite=Lax`;
-        
-        // 🟢 100% FIX: 1 second (1000ms) ka delay lagaya hai taaki cookie pakka save ho jaye
-        setTimeout(() => {
-          window.location.href = '/admin';
-        }, 1000);
+        // 🟢 FIX: Frontend se cookie set karna aur timeout hata diya gaya hai.
+        // Kyunki ab /api/login ne secure cookie backend se set kar di hai,
+        // hum seedha admin page par redirect karenge taaki middleware naya session padh sake.
+        window.location.href = '/admin';
       } else {
         setError(data.message || "Invalid Email or Password");
       }

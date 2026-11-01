@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import connectMongo from '@/lib/mongodb'; // 🟢 Yahan db ki jagah mongodb kar diya hai
+import connectMongo from '@/lib/mongodb'; 
 import Setting from '@/models/Setting';
 
 export async function POST(req) {
@@ -7,7 +7,7 @@ export async function POST(req) {
     const { email, password } = await req.json();
 
     // Database connect karein
-    await connectMongo(); // 🟢 Yahan bhi connectMongo kar diya hai
+    await connectMongo(); 
 
     // Database se admin settings fetch karein
     let settings = await Setting.findOne({});
@@ -19,13 +19,15 @@ export async function POST(req) {
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       const response = NextResponse.json({ success: true, message: "Login successful" });
 
-      // Session Cookie set kar rahe hain (browser close hote hi logout ho jayega)
+      // 🟢 100% FIX: Cookie ko strong banaya gaya hai taaki page change par delete na ho
       response.cookies.set({
         name: 'admin_auth_token',
         value: 'authenticated_true',
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        path: '/',
+        httpOnly: true, // Frontend nahi chhed payega, sirf Vercel ka server (middleware) padhega
+        secure: process.env.NODE_ENV === 'production', // Vercel HTTPS par true rahega
+        sameSite: 'lax', // Page refresh/change par token gayab nahi hoga
+        path: '/', // Saare admin pages par valid rahega
+        maxAge: 30 * 24 * 60 * 60, // 30 din tak logged in rahega
       });
 
       return response;
