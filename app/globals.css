@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Premium Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6; /* Ligh gray background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937; /* Dark gray to match your navbar */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #dc2626; /* Premium Red */
+}
+
+/* Basic resets */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
