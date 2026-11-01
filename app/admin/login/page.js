@@ -1,10 +1,9 @@
 "use client";
 import { useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+// useRouter ko hata diya gaya hai kyunki hum hard reload use karenge
 
 export default function AdminLogin() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -29,13 +28,12 @@ export default function AdminLogin() {
       const data = await res.json();
       
       if (data.success) {
-        // 🟢 FIX: Login success hone par Cookie set karna (path=/ zaroori hai)
-        // Agar "Remember Me" par click hai toh 30 din, nahi toh 1 din (86400 sec)
+        // 🟢 FIX 1: Cookie ko Secure aur SameSite=Lax ke sath set karna (Vercel ke liye zaroori)
         const maxAge = rememberMe ? 30 * 24 * 60 * 60 : 86400; 
-        document.cookie = `admin_auth_token=authenticated_true; path=/; max-age=${maxAge}`;
+        document.cookie = `admin_auth_token=authenticated_true; path=/; max-age=${maxAge}; Secure; SameSite=Lax`;
         
-        // Next.js ke naye App Router ke liye useRouter use karna zyada fast hai
-        router.push('/admin');
+        // 🟢 FIX 2: router.push ki jagah window.location.href use karna taaki middleware turant cookie padh sake
+        window.location.href = '/admin';
       } else {
         setError(data.message || "Invalid Email or Password");
       }
