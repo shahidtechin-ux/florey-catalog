@@ -1,15 +1,17 @@
 "use client";
 import { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function AdminLogin() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   
-  // 🟢 NAYA: Password Show/Hide ke liye state
+  // Password Show/Hide ke liye state
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
@@ -27,7 +29,13 @@ export default function AdminLogin() {
       const data = await res.json();
       
       if (data.success) {
-        window.location.href = '/admin'; // Login successful hone par dashboard
+        // 🟢 FIX: Login success hone par Cookie set karna (path=/ zaroori hai)
+        // Agar "Remember Me" par click hai toh 30 din, nahi toh 1 din (86400 sec)
+        const maxAge = rememberMe ? 30 * 24 * 60 * 60 : 86400; 
+        document.cookie = `admin_auth_token=authenticated_true; path=/; max-age=${maxAge}`;
+        
+        // Next.js ke naye App Router ke liye useRouter use karna zyada fast hai
+        router.push('/admin');
       } else {
         setError(data.message || "Invalid Email or Password");
       }
@@ -116,7 +124,7 @@ export default function AdminLogin() {
                 placeholder="Enter your password"
               />
 
-              {/* 🟢 Right Eye Icon (Show/Hide) */}
+              {/* Right Eye Icon (Show/Hide) */}
               <button 
                 type="button" 
                 onClick={() => setShowPassword(!showPassword)}
