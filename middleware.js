@@ -2,23 +2,24 @@ import { NextResponse } from 'next/server';
 
 export function middleware(request) {
   const path = request.nextUrl.pathname;
+  const isLoginPage = path === '/admin/login';
   
-  // Agar user /admin par hai, par login page par NAHI hai
-  if (path.startsWith('/admin') && path !== '/admin/login') {
-    const token = request.cookies.get('admin_auth_token')?.value;
+  // 🟢 Aapki cookie ka naam aur value check
+  const token = request.cookies.get('admin_auth_token')?.value;
+  const isAuthenticated = token === 'authenticated_true';
+
+  // Sirf /admin wale pages par rule lagana hai
+  if (path.startsWith('/admin')) {
     
-    // Agar token nahi hai, toh redirect to naya login page
-    if (token !== 'authenticated_true') {
+    // 1. Agar login nahi hai aur kisi bhi admin page par jane ki koshish kare -> Login par bhejo
+    if (!isAuthenticated && !isLoginPage) {
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
-  }
 
-  // Agar user pehle se login hai aur wapas login page kholta hai, toh seedha dashboard bhej do
-  if (path === '/admin/login') {
-     const token = request.cookies.get('admin_auth_token')?.value;
-     if (token === 'authenticated_true') {
-         return NextResponse.redirect(new URL('/admin', request.url));
-     }
+    // 2. Agar pehle se login hai aur login page khole -> Wapas dashboard bhej do
+    if (isAuthenticated && isLoginPage) {
+      return NextResponse.redirect(new URL('/admin', request.url));
+    }
   }
   
   return NextResponse.next();
