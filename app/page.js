@@ -178,14 +178,14 @@ export default function Home() {
   if (isMaintenance) {
     return (
       <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-red-600/20 text-red-500 rounded-full flex items-center justify-center mb-4 sm:mb-6 animate-pulse">
-          <svg className="w-10 h-10 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        <div className="w-24 h-24 bg-red-600/20 text-red-500 rounded-full flex items-center justify-center mb-6 animate-pulse">
+          <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
         </div>
-        <h1 className="text-2xl sm:text-5xl font-extrabold text-white mb-2 sm:mb-4">Website Under Maintenance</h1>
-        <p className="text-sm sm:text-lg text-gray-400 max-w-md mx-auto mb-6 sm:mb-8">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">Website Under Maintenance</h1>
+        <p className="text-lg text-gray-400 max-w-md mx-auto mb-8">
           We are currently updating our website to bring you a better experience. Please check back later.
         </p>
-        <p className="text-xs sm:text-sm text-gray-500 font-mono">FLOREY Electricals Team</p>
+        <p className="text-sm text-gray-500 font-mono">FLOREY Electricals Team</p>
       </div>
     );
   }
@@ -193,9 +193,9 @@ export default function Home() {
   return (
     <div className="bg-gray-50 pb-0 font-sans">
       
-      {/* 1. Image Slider Section */}
+      {/* 1. Image Slider Section - 🟢 100% ORIGINAL WAPAS KAR DIYA */}
       <section 
-        className="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-video bg-gray-900 overflow-hidden border-b-[3px] sm:border-b-[4px] border-red-600 group flex items-center justify-center touch-pan-y select-none"
+        className="relative w-full aspect-[16/9] md:aspect-video bg-gray-900 overflow-hidden border-b-[4px] border-red-600 group flex items-center justify-center touch-pan-y select-none"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -226,20 +226,20 @@ export default function Home() {
           <svg className="w-5 h-5 sm:w-6 sm:h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7"></path></svg>
         </button>
         
-        <div className="absolute bottom-[12%] sm:bottom-[15%] w-full flex flex-row justify-center sm:justify-start sm:left-[5%] gap-2 sm:gap-4 z-30 px-3 sm:px-0">
-          <Link href="/products" className="flex-1 sm:flex-none">
-            <button className="w-full sm:w-auto bg-white text-gray-900 font-bold sm:font-extrabold px-3 py-2.5 sm:px-8 sm:py-3.5 rounded-lg sm:rounded-full shadow-xl hover:bg-gray-200 hover:scale-105 transition-all duration-300 text-[11px] sm:text-base md:text-lg border border-gray-200 text-center">
+        <div className="absolute bottom-[10%] sm:bottom-[15%] left-[5%] flex flex-row gap-2 sm:gap-4 z-30 w-auto whitespace-nowrap">
+          <Link href="/products">
+            <button className="bg-white text-gray-900 font-bold sm:font-extrabold px-3.5 py-1.5 sm:px-8 sm:py-3.5 rounded-full shadow-xl hover:bg-gray-200 hover:scale-105 transition-all duration-300 text-[11px] sm:text-base md:text-lg border border-gray-200">
               View Products
             </button>
           </Link>
-          <Link href="/distributorship" className="flex-1 sm:flex-none">
-            <button className="w-full sm:w-auto bg-red-600 text-white font-bold sm:font-extrabold px-3 py-2.5 sm:px-8 sm:py-3.5 rounded-lg sm:rounded-full shadow-xl hover:bg-red-700 hover:scale-105 transition-all duration-300 text-[11px] sm:text-base md:text-lg border border-red-600 sm:border-2 text-center">
+          <Link href="/distributorship">
+            <button className="bg-red-600 text-white font-bold sm:font-extrabold px-3.5 py-1.5 sm:px-8 sm:py-3.5 rounded-full shadow-xl hover:bg-red-700 hover:scale-105 transition-all duration-300 text-[11px] sm:text-base md:text-lg border border-red-600 sm:border-2">
               Become a Distributor
             </button>
           </Link>
         </div>
 
-        <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-30 bg-white/30 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full backdrop-blur-sm">
+        <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-30 bg-white/30 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full backdrop-blur-sm">
           {sliderImages.map((_, index) => (
             <button key={index} onClick={() => setCurrentIndex(index)} className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${index === currentIndex ? "bg-red-600 w-4 sm:w-8" : "bg-gray-400 w-1.5 sm:w-2 hover:bg-gray-600"}`}></button>
           ))}
@@ -260,7 +260,7 @@ export default function Home() {
           <CategoryCard title="LED Lighting" image="/images/cat-led.png" />
           <CategoryCard title="Electrical Accessories" image="/images/cat-accessories.png" />
           <CategoryCard title="Wires & Cables" image="/images/cat-wires.png" />
-          <CategoryCard title="PC/GEM/CRYSTAL Series" image="/images/cat-series.png" />
+          <CategoryCard title="PC/GEM/CRYSTAL" image="/images/cat-series.png" />
         </div>
       </section>
 
@@ -320,7 +320,7 @@ export default function Home() {
               <h2 className="text-2xl sm:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight">
                 DESIGNED FOR <br className="hidden sm:block"/> <span className="text-gray-300">MODERN SPACES</span>
               </h2>
-              <p className="text-xs sm:text-lg text-gray-400 leading-relaxed max-w-lg mx-auto md:mx-0 mb-6 sm:mb-8">
+              <p className="text-sm sm:text-lg text-gray-400 leading-relaxed max-w-lg mx-auto md:mx-0 mb-6 sm:mb-8">
                 From switches and sockets to lighting and electrical protection, discover solutions designed perfectly for modern, luxury, and contemporary spaces.
               </p>
               <div>
@@ -419,7 +419,7 @@ export default function Home() {
                   "Full product catalogue access"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 sm:gap-4 text-gray-300">
-                    <div className="w-5 h-5 sm:w-6 h-6 rounded-full bg-red-600/20 flex items-center justify-center flex-shrink-0 text-red-500">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-600/20 flex items-center justify-center flex-shrink-0 text-red-500">
                       <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
                     </div>
                     <span className="text-xs sm:text-base">{item}</span>
@@ -480,7 +480,7 @@ export default function Home() {
 
       {/* 9. PRE-FOOTER PREMIUM CTA (Black Background) */}
       <section className="bg-gray-900 py-12 sm:py-16 relative overflow-hidden border-t border-gray-800">
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(#fff 2px, transparent 2px)", backgroundSize: "20px 20px" }}></div>
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(#fff 2px, transparent 2px)", backgroundSize: "20px 20px sm:30px 30px" }}></div>
         
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <h2 className="text-2xl sm:text-5xl font-black text-white mb-4 sm:mb-6">Let's Build a Better Electrical Future</h2>
