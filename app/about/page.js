@@ -6,12 +6,12 @@ export default function AboutPage() {
   return (
     <div className="bg-[#fcfcfd] min-h-screen font-sans">
       
-      {/* 1. CINEMATIC HERO SECTION - 🟢 FIXED TOP SPACING */}
-      <section className="relative bg-[#07080b] border-b-[3px] sm:border-b-[4px] border-red-600 flex items-center min-h-[50vh] sm:min-h-[70vh] overflow-hidden pt-6 sm:pt-16">
+      {/* 1. CINEMATIC HERO SECTION - 🟢 FIXED MOBILE SPACING */}
+      <section className="relative bg-[#07080b] border-b-[3px] sm:border-b-[4px] border-red-600 flex items-center min-h-[35vh] sm:min-h-[70vh] overflow-hidden pt-4 sm:pt-16">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] sm:w-[800px] sm:h-[800px] bg-red-600/15 blur-[60px] sm:blur-[120px] rounded-full pointer-events-none z-0"></div>
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 z-0"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center text-center py-6 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center text-center py-10 sm:py-20">
           <h4 className="text-red-500 font-bold tracking-[0.15em] sm:tracking-[0.3em] uppercase mb-2 sm:mb-4 text-[10px] sm:text-sm flex items-center justify-center gap-1.5 sm:gap-3">
             <span className="w-6 sm:w-10 h-[2px] bg-red-600"></span> 
             Company Profile 
