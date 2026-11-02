@@ -56,7 +56,7 @@ export default function AdminLayout({ children }) {
   ];
 
   return (
-    <div className="fixed inset-0 z-[9999] flex h-screen bg-gray-50 font-sans overflow-hidden w-full max-w-[100vw]">
+    <div className="fixed inset-0 z-[9999] flex h-screen bg-gray-50 font-sans overflow-hidden">
       
       {isSidebarOpen && (
         <div 
@@ -66,7 +66,7 @@ export default function AdminLayout({ children }) {
       )}
 
       {/* SIDEBAR */}
-      <aside className={`absolute md:relative w-64 h-full bg-gray-900 text-white flex-col shadow-2xl z-50 transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'} flex shrink-0`}>
+      <aside className={`absolute md:relative w-64 h-full bg-gray-900 text-white flex-col shadow-2xl z-50 transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'} flex`}>
         <div className="h-20 sm:h-24 flex items-center px-4 sm:px-6 border-b border-gray-800 shrink-0">
           
           <div className="w-12 h-12 sm:w-14 sm:h-14 mr-3 relative flex items-center justify-center shrink-0">
@@ -102,6 +102,7 @@ export default function AdminLayout({ children }) {
         </nav>
 
         <div className="p-4 border-t border-gray-800 shrink-0">
+          {/* 🟢 Yahan <Link> hatakar onClick laga diya gaya hai */}
           <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-bold text-red-400 hover:text-white hover:bg-red-600 rounded-xl transition-colors shadow-sm cursor-pointer">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
             Logout Admin
@@ -110,8 +111,7 @@ export default function AdminLayout({ children }) {
       </aside>
 
       {/* MAIN CONTENT AREA */}
-      {/* 🟢 FIX: Added min-w-0 aur overflow-x-auto daala hai */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden w-full min-w-0">
+      <main className="flex-1 flex flex-col h-screen overflow-hidden w-full">
         
         <header className="h-20 sm:h-24 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 sm:px-8 z-10 shrink-0 shadow-md">
           
@@ -121,7 +121,7 @@ export default function AdminLayout({ children }) {
             </button>
             
             <div className="flex flex-col">
-              <h2 className="text-lg sm:text-2xl font-bold text-white tracking-wide leading-tight truncate">
+              <h2 className="text-lg sm:text-2xl font-bold text-white tracking-wide leading-tight">
                 FLOREY Admin Console
               </h2>
               <p className="text-[9px] sm:text-xs text-gray-400 font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase mt-0.5 sm:mt-1">
@@ -135,7 +135,7 @@ export default function AdminLayout({ children }) {
             {/* NOTIFICATION BELL */}
             <button 
               onClick={() => setIsNotifOpen(!isNotifOpen)}
-              className="w-10 h-10 sm:w-11 sm:h-11 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all relative border border-gray-700 shrink-0"
+              className="w-10 h-10 sm:w-11 sm:h-11 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all relative border border-gray-700"
             >
               <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -199,7 +199,7 @@ export default function AdminLayout({ children }) {
             )}
 
             {/* SECURITY / ADMIN ICON */}
-            <div className="w-10 h-10 sm:w-11 sm:h-11 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all cursor-pointer border border-gray-700 shrink-0">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all cursor-pointer border border-gray-700">
               <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
@@ -208,11 +208,8 @@ export default function AdminLayout({ children }) {
           </div>
         </header>
 
-        {/* 🟢 YAHAN OVERFLOW FIX LAGAYA GAYA HAI */}
-        <div className="flex-1 overflow-y-auto overflow-x-auto w-full bg-gray-50 p-4 sm:p-8">
-          <div className="min-w-fit w-full">
-            {children}
-          </div>
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-gray-50">
+          {children}
         </div>
       </main>
 
