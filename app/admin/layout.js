@@ -4,32 +4,121 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
+// Time format karne ka function
+function timeAgo(dateString) {
+  const date = new Date(dateString);
+  const now = new Date();
+  const seconds = Math.round((now - date) / 1000);
+  if (seconds < 60) return "Just now";
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 60) return `${minutes} mins ago`;
+  const hours = Math.round(minutes / 60);
+  if (hours < 24) return `${hours} hours ago`;
+  const days = Math.round(hours / 24);
+  if (days === 1) return `Yesterday`;
+  return `${days} days ago`;
+}
+
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [hasUnread, setHasUnread] = useState(false); 
+  const [notifications, setNotifications] = useState([]);
+
+  // Database se real notifications fetch karne ka function
+  const fetchNotifications = async () => {
+    try {
+      const [contactRes, distRes] = await Promise.all([
+        fetch('/api/contact').catch(() => null),
+        fetch('/api/distributorship').catch(() => null)
+      ]);
+
+      let allNotifs = [];
+
+      // 1. Process Enquiries
+      if (contactRes && contactRes.ok) {
+        const contactData = await contactRes.json();
+        if (contactData.success && contactData.data) {
+          const enquiries = contactData.data.map(item => ({
+            id: item._id,
+            type: 'enquiry',
+            title: 'New Customer Enquiry',
+            message: `${item.fullName || 'A customer'} sent a query.`,
+            date: new Date(item.createdAt || Date.now()),
+            url: '/admin/enquiries',
+            color: 'bg-blue-500'
+          }));
+          allNotifs = [...allNotifs, ...enquiries];
+        }
+      }
+
+      // 2. Process Distributorships
+      if (distRes && distRes.ok) {
+        const distData = await distRes.json();
+        if (distData.success && distData.data) {
+          const distributors = distData.data.map(item => ({
+            id: item._id,
+            type: 'distributorship',
+            title: 'Distributorship Application',
+            message: `${item.companyName || 'A business'} has applied.`,
+            date: new Date(item.createdAt || Date.now()),
+            url: '/admin/distributors',
+            color: 'bg-green-500'
+          }));
+          allNotifs = [...allNotifs, ...distributors];
+        }
+      }
+
+      // 🟢 FIX: Check if notifications were cleared previously
+      const clearedTime = localStorage.getItem('clearedTimestamp');
+      if (clearedTime) {
+        allNotifs = allNotifs.filter(n => n.date.getTime() > Number(clearedTime));
+      }
+
+      // Latest wali sabse upar laane ke liye sort karenge
+      allNotifs.sort((a, b) => b.date - a.date);
+      setNotifications(allNotifs.slice(0, 10));
+
+      const lastRead = localStorage.getItem('lastReadTimestamp');
+      if (!lastRead && allNotifs.length > 0) {
+        setHasUnread(true);
+      } else if (lastRead) {
+        const hasNew = allNotifs.some(n => n.date.getTime() > Number(lastRead));
+        setHasUnread(hasNew);
+      }
+
+    } catch (err) {
+      console.error("Error fetching notifications:", err);
+    }
+  };
 
   useEffect(() => {
     document.title = "Admin Dashboard | Shajjad Electronics";
-    const notificationsRead = localStorage.getItem('notificationsRead');
-    if (notificationsRead !== 'true') {
-       setHasUnread(true);
-    }
+    
+    fetchNotifications();
+    const intervalId = setInterval(fetchNotifications, 30000);
+    
+    return () => clearInterval(intervalId);
   }, [pathname]);
 
   const handleMarkAllRead = () => {
      setHasUnread(false);
-     setIsNotifOpen(false);
-     localStorage.setItem('notificationsRead', 'true');
+     localStorage.setItem('lastReadTimestamp', Date.now().toString());
   };
 
-  // 🟢 100% FIX: Logout ko sahi function se chalaya hai
+  // 🟢 NAYA: Clear All function
+  const handleClearAll = () => {
+     setNotifications([]);
+     setHasUnread(false);
+     // Ab ye database se next time auto-load nahi honge screen par
+     localStorage.setItem('clearedTimestamp', Date.now().toString());
+  };
+
   const handleLogout = async () => {
     try {
       await fetch('/api/logout', { method: 'POST' });
-      // Logout hone ke baad turant login page par bhej do
       window.location.href = '/admin/login';
     } catch (error) {
       console.error("Logout failed:", error);
@@ -56,7 +145,7 @@ export default function AdminLayout({ children }) {
   ];
 
   return (
-    // 🟢 FIX 1: h-screen ki jagah h-[100dvh] taaki mobile browser par height perfect rahe.
+    // 🟢 FIX 1: h-[100dvh] taaki mobile browser par height perfect rahe.
     <div className="fixed inset-0 z-[9999] flex h-[100dvh] bg-gray-50 font-sans overflow-hidden w-full max-w-[100vw]">
       
       {isSidebarOpen && (
@@ -103,7 +192,6 @@ export default function AdminLayout({ children }) {
         </nav>
 
         <div className="p-4 border-t border-gray-800 shrink-0">
-          {/* 🟢 Yahan <Link> hatakar onClick laga diya gaya hai */}
           <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-bold text-red-400 hover:text-white hover:bg-red-600 rounded-xl transition-colors shadow-sm cursor-pointer">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
             Logout Admin
@@ -112,7 +200,6 @@ export default function AdminLayout({ children }) {
       </aside>
 
       {/* MAIN CONTENT AREA */}
-      {/* 🟢 FIX 2: Added min-w-0 for flex layout stability */}
       <main className="flex-1 flex flex-col h-full overflow-hidden w-full min-w-0">
         
         <header className="h-20 sm:h-24 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 sm:px-8 z-10 shrink-0 shadow-md">
@@ -149,53 +236,49 @@ export default function AdminLayout({ children }) {
 
             {/* NOTIFICATION DROPDOWN MENU */}
             {isNotifOpen && (
-              <div className="absolute top-14 right-14 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden transform origin-top-right transition-all">
+              <div className="absolute top-14 right-0 sm:right-14 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden transform origin-top-right transition-all">
+                
+                {/* 🟢 UPDATED: Mark Read + Clear All Buttons */}
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-100 flex justify-between items-center">
                   <span className="text-sm font-black text-gray-900">Notifications</span>
-                  <button 
-                    onClick={handleMarkAllRead} 
-                    className="text-xs text-red-600 font-bold hover:underline"
-                  >
-                    Mark all read
-                  </button>
-                </div>
-                <div className="flex flex-col max-h-[350px] overflow-y-auto">
-                  
-                  <Link href="/admin/enquiries" onClick={() => setIsNotifOpen(false)} className="px-4 py-3.5 hover:bg-gray-50 border-b border-gray-50 flex items-start gap-3 transition-colors">
-                    <div className="w-2 h-2 mt-1.5 bg-blue-500 rounded-full shrink-0"></div>
-                    <div>
-                      <p className="text-sm font-bold text-gray-800 leading-tight">New Customer Enquiry</p>
-                      <p className="text-[11px] text-gray-500 mt-1">A customer has submitted a new query.</p>
-                      <p className="text-[10px] font-medium text-gray-400 mt-1">Just now</p>
-                    </div>
-                  </Link>
-
-                  <Link href="/admin/distributors" onClick={() => setIsNotifOpen(false)} className="px-4 py-3.5 hover:bg-gray-50 border-b border-gray-50 flex items-start gap-3 transition-colors">
-                    <div className="w-2 h-2 mt-1.5 bg-green-500 rounded-full shrink-0"></div>
-                    <div>
-                      <p className="text-sm font-bold text-gray-800 leading-tight">New Distributorship Application</p>
-                      <p className="text-[11px] text-gray-500 mt-1">Review the latest partnership request.</p>
-                      <p className="text-[10px] font-medium text-gray-400 mt-1">2 hours ago</p>
-                    </div>
-                  </Link>
-
-                  <Link href="/admin/products" onClick={() => setIsNotifOpen(false)} className="px-4 py-3.5 hover:bg-gray-50 border-b border-gray-50 flex items-start gap-3 transition-colors">
-                    <div className="w-2 h-2 mt-1.5 bg-purple-500 rounded-full shrink-0"></div>
-                    <div>
-                      <p className="text-sm font-bold text-gray-800 leading-tight">Product Update</p>
-                      <p className="text-[11px] text-gray-500 mt-1">Your recent product changes are live.</p>
-                      <p className="text-[10px] font-medium text-gray-400 mt-1">Yesterday</p>
-                    </div>
-                  </Link>
-
-                  <div className="px-4 py-3.5 hover:bg-gray-50 flex items-start gap-3 transition-colors cursor-pointer">
-                    <div className="w-2 h-2 mt-1.5 bg-gray-400 rounded-full shrink-0"></div>
-                    <div>
-                      <p className="text-sm font-bold text-gray-800 leading-tight">System Alerts</p>
-                      <p className="text-[11px] text-gray-500 mt-1">Server resources and database are optimal.</p>
-                    </div>
+                  <div className="flex items-center gap-3">
+                    <button 
+                      onClick={handleMarkAllRead} 
+                      className="text-xs text-blue-600 font-bold hover:underline"
+                    >
+                      Mark read
+                    </button>
+                    <button 
+                      onClick={handleClearAll} 
+                      className="text-xs text-red-600 font-bold hover:underline"
+                    >
+                      Clear all
+                    </button>
                   </div>
-
+                </div>
+                
+                <div className="flex flex-col max-h-[350px] overflow-y-auto">
+                  {notifications.length > 0 ? (
+                    notifications.map((notif, index) => (
+                      <Link 
+                        key={notif.id || index} 
+                        href={notif.url} 
+                        onClick={() => setIsNotifOpen(false)} 
+                        className="px-4 py-3.5 hover:bg-gray-50 border-b border-gray-50 flex items-start gap-3 transition-colors"
+                      >
+                        <div className={`w-2 h-2 mt-1.5 rounded-full shrink-0 ${notif.color || 'bg-gray-400'}`}></div>
+                        <div>
+                          <p className="text-sm font-bold text-gray-800 leading-tight">{notif.title}</p>
+                          <p className="text-[11px] text-gray-500 mt-1 line-clamp-1">{notif.message}</p>
+                          <p className="text-[10px] font-medium text-gray-400 mt-1">{timeAgo(notif.date)}</p>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="p-6 text-center text-sm text-gray-500 italic">
+                      No recent notifications.
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -210,7 +293,7 @@ export default function AdminLayout({ children }) {
           </div>
         </header>
 
-        {/* 🟢 FIX 3: Added pb-20 to ensure bottom elements don't get cut off, and overflow-x-hidden to prevent horizontal sliding */}
+        {/* 🟢 FIX 3: Added pb-20 and overflow-x-hidden */}
         <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-8 bg-gray-50 pb-20 sm:pb-12 w-full">
           {children}
         </div>
