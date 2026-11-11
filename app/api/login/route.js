@@ -27,7 +27,7 @@ export async function POST(req) {
         secure: process.env.NODE_ENV === 'production', // Vercel HTTPS par true rahega
         sameSite: 'lax', // Page refresh/change par token gayab nahi hoga
         path: '/', // Saare admin pages par valid rahega
-        maxAge: 30 * 24 * 60 * 60, // 30 din tak logged in rahega
+        maxAge: 12 * 60 * 60, // 12 ghante tak logged in rahega
       });
 
       return response;

@@ -462,7 +462,7 @@ export default function ContactPage() {
                <div>
                  <h4 className="text-gray-500 font-bold uppercase tracking-widest text-[10px] sm:text-xs mb-1.5 sm:mb-2">Corporate Office</h4>
                  <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-1.5 sm:mb-2">Florey | Shajjad Electronics HQ</h2>
-                 <p className="text-gray-600 text-xs sm:text-sm">Noida Sector 69 B - 19, Uttter Pradesh 110001, India</p>
+                 <p className="text-gray-600 text-xs sm:text-sm">Noida Sector 69 B - 19, Uttter Pradesh, India</p>
                </div>
                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:w-auto shrink-0">
                   <div className="bg-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl border border-gray-200 shadow-sm text-center w-full sm:w-auto">
